@@ -9,5 +9,12 @@ namespace ImageProcessor
 {
     public class Image
     {
+
+        public string Filename { get;private set; }
+        public Image(string imageFilename)
+        {
+            Filename = imageFilename;
+
+        }
     }
 }

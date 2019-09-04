@@ -5,29 +5,52 @@ using System.Text;
 using System.Threading.Tasks;
 using ImageProcessor;
 using System.ComponentModel;
+using Prism.Mvvm;
+using System.Collections.ObjectModel;
 
 namespace TexRec.MainModel
 {
-    class ImageListModel
+    class ImageListModel:BindableBase
     {
-        private List<Image> imageList;
+        private ObservableCollection<Image> sourceList;
 
-        public List<Image> ImageList
+        public ObservableCollection<Image> SourceList
         {
-            get { return imageList; }
-            set {
-                imageList =value;
-                //RaisePropertyChanged("imageList");
+            get { return sourceList; }
+            private set {
+                sourceList = value;
+                RaisePropertyChanged("sourceList");
+            }
+
+        }
+
+        private ObservableCollection<Image> resultList;
+
+        public ObservableCollection<Image> ResultList
+        {
+            get { return resultList; }
+            private set
+            {
+                resultList = value;
+                RaisePropertyChanged("resultList");
             }
 
         }
 
         public ImageListModel()
         {
-            imageList = new List<Image>();
-
+            sourceList = new ObservableCollection<Image>();
+            resultList = new ObservableCollection<Image>();
         }
 
+        public void SetList(List<string> files)
+        {
+            foreach (string file in files)
+            {
+                sourceList.Add(new Image(file));
+            }
+
+        }
 
         public void ProcessList()
         {
