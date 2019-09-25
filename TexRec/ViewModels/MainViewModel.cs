@@ -46,18 +46,33 @@ namespace TexRec.MainViewModel
 
 
 
-        public DelegateCommand<string> ProcessCommand { get; }
+        public DelegateCommand ProcessCommand { get; }
 
+        //Предполагаемый вариант
+        //public DelegateCommand<List<string>> ChangeListCommand { get; }
+
+        //пробный вариант
         public DelegateCommand<string> ChangeListCommand { get; }
+
+        public DelegateCommand<List<string>> LoadListCommand { get; }
 
         public MainViewModel()
         {
+            //пробрасываем изменившиеся свойства модели во View
+            mainModel.PropertyChanged += (s, e) => {               
+                RaisePropertyChanged(e.PropertyName);
+            };
 
-            mainModel.PropertyChanged += (s, e) => { RaisePropertyChanged(e.PropertyName); };
+            ChangeListCommand = new DelegateCommand<string> ((item) => {
+                //пробный вариант
+                var nlist = new List<string>();
+                nlist.Add(item);
+                mainModel.SetList(nlist);
+            });
 
-            ProcessCommand = new DelegateCommand<string>(str => {
-                
-                RaisePropertyChanged("SourceList");
+            ProcessCommand = new DelegateCommand (() => {
+
+                mainModel.ProcessList();
             });
 
 

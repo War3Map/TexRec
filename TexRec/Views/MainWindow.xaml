@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:local="clr-namespace:TexRec"
         mc:Ignorable="d"
         Title="TexRec" Height="530.584" Width="572.581">
@@ -29,7 +30,13 @@
         </ListView>
         <Menu HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="21" Grid.ColumnSpan="2">
             <MenuItem x:Name="fileMenuItem" Header="Файл" Height="21" Width="62">
-                <MenuItem Header="Загрузить файл" HorizontalAlignment="Left" Height="24" Width="180"/>
+                <MenuItem x:Name="loadFileMenuItem" Header="Загрузить файл" HorizontalAlignment="Left" Height="24" Width="180">                    
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                            <i:InvokeCommandAction Command="{Binding ChangeListCommand}" CommandParameter="{Binding Header, ElementName=loadFileMenuItem}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>                    
+                </MenuItem>
                 <MenuItem Header="Загрузить файлы" HorizontalAlignment="Left" Height="24" Width="189" Margin="0,0,-9,0"/>
                 <Separator HorizontalAlignment="Left" Width="180"/>
                 <MenuItem Header="Сохранить..." HorizontalAlignment="Left" Height="24" Width="180"/>
@@ -38,7 +45,7 @@
 
             </MenuItem>
             <MenuItem Header="Правка" Height="24" Width="65">
-                <MenuItem Header="Открыть в просмотрщике" HorizontalAlignment="Right" Height="24" Width="2000" Margin="0,0,-40,0"/>
+                <MenuItem Header="Открыть в просмотрщике" HorizontalAlignment="Right" Height="24" Width="250" Margin="0,0,-40,0"/>
             </MenuItem>
             <MenuItem Header="Настройки" Height="24" Width="80"/>
         </Menu>

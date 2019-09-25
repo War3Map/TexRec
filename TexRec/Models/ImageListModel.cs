@@ -45,11 +45,20 @@ namespace TexRec.MainModel
 
         public void SetList(List<string> files)
         {
+            sourceList.Clear();
             foreach (string file in files)
             {
                 sourceList.Add(new Image(file));
             }
 
+        }
+
+        public void AddListItems(List<string> files)
+        {
+            foreach (string file in files)
+            {
+                sourceList.Add(new Image(file));
+            }
         }
 
         public void ProcessList()
