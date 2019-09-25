@@ -5,9 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TexRec.ImageView"
         mc:Ignorable="d"
-        Title="ImageForm" Height="450" Width="800">
+        Title="Просмотр изображений" Height="423" Width="573.5">
     <Grid>
-        <Menu HorizontalAlignment="Left" Height="40" Margin="62,10,0,0" VerticalAlignment="Top" Width="362"/>
+        <Menu Height="20" VerticalAlignment="Top">
+            <MenuItem Header="Файл" Height="20" Width="56">
+                <MenuItem Header="Открыть" HorizontalAlignment="Left" Height="24" Width="145"/>
+                <MenuItem Header="Сохранить" HorizontalAlignment="Left" Height="24" Width="145"/>
+                <MenuItem Header="Сохранить как.." HorizontalAlignment="Left" Height="24" Width="145"/>
+            </MenuItem>
+            <MenuItem Header="Правка" Height="20" Width="60"/>
+            <MenuItem Header="Фильтры" Height="20" Width="100"/>
+        </Menu>
+        <Image Margin="0,20,0,0"/>
 
     </Grid>
 </Window>
