@@ -14,6 +14,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Changelog.txt = Changelog.txt
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeuralRecognizer", "NeuralRecognizer\NeuralRecognizer.csproj", "{6AB8C9E3-2AF6-41DD-8DB0-CAE1F6111AC1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordProcessor", "WordProcessor\WordProcessor.csproj", "{7F0C919D-284C-4641-9F4B-D0A0AF3DAFD0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +36,14 @@ Global
 		{1E7EEE8A-1EEB-4E82-9533-989CB866240B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1E7EEE8A-1EEB-4E82-9533-989CB866240B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1E7EEE8A-1EEB-4E82-9533-989CB866240B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6AB8C9E3-2AF6-41DD-8DB0-CAE1F6111AC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AB8C9E3-2AF6-41DD-8DB0-CAE1F6111AC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AB8C9E3-2AF6-41DD-8DB0-CAE1F6111AC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AB8C9E3-2AF6-41DD-8DB0-CAE1F6111AC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F0C919D-284C-4641-9F4B-D0A0AF3DAFD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F0C919D-284C-4641-9F4B-D0A0AF3DAFD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F0C919D-284C-4641-9F4B-D0A0AF3DAFD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F0C919D-284C-4641-9F4B-D0A0AF3DAFD0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
