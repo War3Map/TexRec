@@ -27,6 +27,10 @@ namespace TexRec
             InitializeComponent();
             viewModel = new TexRec.MainViewModel.MainViewModel();
             DataContext = viewModel;
+
+
         }
+
+        
     }
 }
