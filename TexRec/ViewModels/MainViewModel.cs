@@ -24,18 +24,21 @@ namespace TexRec.MainViewModel
         //Сервис для работы с диалогами
         IDialogLoadSaveService dialog;
 
-        private ObservableCollection<string> sourceList;
 
-        public ObservableCollection<string> SourceList
-        {
-            get { return sourceList; }
-            private set
-            {
-                sourceList = value;
-                RaisePropertyChanged("sourceList");
-            }
+        public ReadOnlyObservableCollection<string> sourceList => new ReadOnlyObservableCollection<string>( mainModel.GetFileNameList());
 
-        }
+        //private ObservableCollection<string> sourceList;
+
+        //public ObservableCollection<string> SourceList
+        //{
+        //    get { return sourceList; }
+        //    private set
+        //    {
+        //        sourceList = value;
+        //        RaisePropertyChanged("sourceList");
+        //    }
+
+        //}
 
         private ObservableCollection<string> resultList;
 
@@ -86,6 +89,8 @@ namespace TexRec.MainViewModel
 
             DragFileListCommand = new DelegateCommand<RoutedEventArgs>(
                 (e) => {
+
+                    //можно изменить
                     var eventArgs = e as DragEventArgs;
                     var files= (string [])eventArgs.Data.GetData(DataFormats.FileDrop);
                     mainModel.SetList(files.ToList<string>());

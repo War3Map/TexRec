@@ -59,6 +59,22 @@ namespace TexRec.MainModel
 
         }
 
+        /// <summary>
+        /// Возвращает список имён файлов основной модели
+        /// </summary>
+        /// <returns> List<string> result</returns>
+        public ObservableCollection<string> GetFileNameList()
+        {            
+            var files = new ObservableCollection<string>();    
+            foreach (var imageFile in sourceList)
+            {
+                files.Add(imageFile.Filename);
+            }
+            return files;
+        }
+
+
+
         public void AddListItems(List<string> files)
         {
             foreach (string file in files)
