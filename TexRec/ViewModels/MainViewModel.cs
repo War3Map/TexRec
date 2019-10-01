@@ -4,19 +4,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
+using System.Linq;
 
 using Prism.Mvvm;
 using MainModel = TexRec.MainModel;
 using Prism.Commands;
 using System.Collections.ObjectModel;
+using TexRec.Functionality;
+using TexRec.Support;
+using System.Windows;
 
 namespace TexRec.MainViewModel
 {
 
     class MainViewModel : BindableBase
     {
+        //основная модель
         MainModel.ImageListModel mainModel = new MainModel.ImageListModel();
-
+        //Сервис для работы с диалогами
+        IDialogLoadSaveService dialog;
 
         private ObservableCollection<string> sourceList;
 
@@ -56,8 +62,11 @@ namespace TexRec.MainViewModel
 
         public DelegateCommand<List<string>> LoadListCommand { get; }
 
-        public MainViewModel()
+        public DelegateCommand<RoutedEventArgs> DragFileListCommand { get; }
+
+        public MainViewModel(IDialogLoadSaveService dialog)
         {
+
             //пробрасываем изменившиеся свойства модели во View
             mainModel.PropertyChanged += (s, e) => {               
                 RaisePropertyChanged(e.PropertyName);
@@ -75,6 +84,14 @@ namespace TexRec.MainViewModel
                 mainModel.ProcessList();
             });
 
+            DragFileListCommand = new DelegateCommand<RoutedEventArgs>(
+                (e) => {
+                    var eventArgs = e as DragEventArgs;
+                    var files= (string [])eventArgs.Data.GetData(DataFormats.FileDrop);
+                    mainModel.SetList(files.ToList<string>());
+                    
+                    }
+                );
 
         }
 

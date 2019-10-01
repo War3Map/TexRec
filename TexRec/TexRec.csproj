@@ -45,6 +45,9 @@
     <Reference Include="ImageProcessor">
       <HintPath>..\ImageProcessor\bin\Debug\ImageProcessor.dll</HintPath>
     </Reference>
+    <Reference Include="Ookii.Dialogs.Wpf, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0c15020868fd6249, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ookii.Dialogs.1.0\lib\net35\Ookii.Dialogs.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="Prism, Version=7.2.0.1367, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
       <HintPath>..\packages\Prism.Core.7.2.0.1367\lib\net45\Prism.dll</HintPath>
     </Reference>
@@ -90,7 +93,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Functionality\IDialog.cs" />
     <Compile Include="Models\ImageModel.cs" />
+    <Compile Include="Functionality\IDialogLoadSaveService.cs" />
+    <Compile Include="Functionality\DialogLoadSaveService.cs" />
     <Compile Include="ViewModels\ImageViewModel.cs" />
     <Compile Include="Views\ImageForm.xaml.cs">
       <DependentUpon>ImageForm.xaml</DependentUpon>

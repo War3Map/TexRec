@@ -8,10 +8,13 @@ using System.ComponentModel;
 using Prism.Mvvm;
 using System.Collections.ObjectModel;
 
+using FileAndDirWorker;
+
 namespace TexRec.MainModel
 {
     class ImageListModel:BindableBase
-    {
+    {       
+
         private ObservableCollection<Image> sourceList;
 
         public ObservableCollection<Image> SourceList
@@ -43,13 +46,16 @@ namespace TexRec.MainModel
             resultList = new ObservableCollection<Image>();
         }
 
-        public void SetList(List<string> files)
+        public void SetList(List<string> paths)
         {
             sourceList.Clear();
+            var files = new List<string>();
+            FileAndDirWorker.FileAndDirWorker.GetAllImageFiles(paths.ToArray(), files);            
             foreach (string file in files)
             {
                 sourceList.Add(new Image(file));
             }
+            RaisePropertyChanged("sourceList");
 
         }
 

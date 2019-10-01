@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace TexRec
 {
     /// <summary>
@@ -25,12 +26,15 @@ namespace TexRec
         public MainWindow()
         {
             InitializeComponent();
-            viewModel = new TexRec.MainViewModel.MainViewModel();
+            viewModel = new TexRec.MainViewModel.MainViewModel(new Support.DialogLoadSaveService());
             DataContext = viewModel;
 
 
         }
 
-        
+        private void ListView_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effects = DragDropEffects.Move;
+        }
     }
 }

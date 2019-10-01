@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:local="clr-namespace:TexRec"
+        xmlns:cmd="http://prismlibrary.com/"
         mc:Ignorable="d"
         Title="TexRec" Height="530.584" Width="572.581">
     <Grid>
@@ -18,8 +19,12 @@
         </Grid.ColumnDefinitions>
         <ListView Margin="12,47,3,3" VerticalAlignment="Stretch" AllowDrop="True"
                   HorizontalAlignment="Stretch" 
-                  ItemsSource="{Binding sourceList, UpdateSourceTrigger=PropertyChanged}">
-
+                  ItemsSource="{Binding sourceList, UpdateSourceTrigger=PropertyChanged}" DragEnter="ListView_DragEnter">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Drop">
+                    <cmd:InvokeCommandAction Command="{Binding DragFileListCommand}" />                    
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
 
 
             <ListView.View>
