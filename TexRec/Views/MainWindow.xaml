@@ -22,7 +22,7 @@
                   ItemsSource="{Binding sourceList, UpdateSourceTrigger=PropertyChanged}" DragEnter="ListView_DragEnter">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="Drop">
-                    <cmd:InvokeCommandAction Command="{Binding DragFileListCommand}" />                    
+                    <cmd:InvokeCommandAction Command="{Binding DragFileListCommand}" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
 
@@ -35,14 +35,20 @@
         </ListView>
         <Menu HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="21" Grid.ColumnSpan="2">
             <MenuItem x:Name="fileMenuItem" Header="Файл" Height="21" Width="62">
-                <MenuItem x:Name="loadFileMenuItem" Header="Загрузить файл" HorizontalAlignment="Left" Height="24" Width="180">                    
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="Click">
-                            <i:InvokeCommandAction Command="{Binding ChangeListCommand}" CommandParameter="{Binding Header, ElementName=loadFileMenuItem}"/>
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>                    
+                <MenuItem x:Name="loadFileMenuItem" Header="Загрузить файл" HorizontalAlignment="Left" Height="24" Width="180">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <i:InvokeCommandAction Command="{Binding LoadListCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
                 </MenuItem>
-                <MenuItem Header="Загрузить файлы" HorizontalAlignment="Left" Height="24" Width="189" Margin="0,0,-9,0"/>
+                <MenuItem Header="Загрузить файлы" HorizontalAlignment="Left" Height="24" Width="189" Margin="0,0,-9,0">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <i:InvokeCommandAction Command="{Binding LoadListCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </MenuItem>
                 <Separator HorizontalAlignment="Left" Width="180"/>
                 <MenuItem Header="Сохранить..." HorizontalAlignment="Left" Height="24" Width="180"/>
                 <MenuItem Header="Сохранить как..." HorizontalAlignment="Left" Height="24" Width="180"/>
@@ -67,6 +73,7 @@
         <Button Content="Обработать" Margin="13,10,10,0" Command="{Binding ProcessCommand}" 
                 Height="38" VerticalAlignment="Top" Grid.Row="1"/>
         <Button Content="Открыть" Margin="10,10,10,0" Height="38" VerticalAlignment="Top" Grid.Row="1" Grid.Column="1"/>
+        <Button x:Name="clearSourceListBttn" Content="X" Command="{Binding ClearListCommand}" Margin="0,21,4,0" Height="22" VerticalAlignment="Top" HorizontalAlignment="Right" Width="25"/>
 
     </Grid>
 </Window>

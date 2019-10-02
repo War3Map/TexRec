@@ -22,7 +22,7 @@ namespace TexRec.MainViewModel
         //основная модель
         MainModel.ImageListModel mainModel = new MainModel.ImageListModel();
         //Сервис для работы с диалогами
-        IDialogLoadSaveService dialog;
+        IDialogLoadSaveService dialogService;
 
 
         public ReadOnlyObservableCollection<string> sourceList => new ReadOnlyObservableCollection<string>( mainModel.GetFileNameList());
@@ -63,38 +63,51 @@ namespace TexRec.MainViewModel
         //пробный вариант
         public DelegateCommand<string> ChangeListCommand { get; }
 
-        public DelegateCommand<List<string>> LoadListCommand { get; }
-
+        //команда загрузки списка
+        public DelegateCommand LoadListCommand { get; }
+        //команда очистки списка
+        public DelegateCommand ClearListCommand { get; }
+        //команда перетягивания элементов на список
         public DelegateCommand<RoutedEventArgs> DragFileListCommand { get; }
 
-        public MainViewModel(IDialogLoadSaveService dialog)
+        //конструктор
+        public MainViewModel(IDialogLoadSaveService dialogService)
         {
-
+            //Инициализируем сервис диалоговых окон
+            this.dialogService = dialogService;
             //пробрасываем изменившиеся свойства модели во View
             mainModel.PropertyChanged += (s, e) => {               
                 RaisePropertyChanged(e.PropertyName);
             };
 
-            ChangeListCommand = new DelegateCommand<string> ((item) => {
-                //пробный вариант
-                var nlist = new List<string>();
-                nlist.Add(item);
-                mainModel.SetList(nlist);
-            });
+            //ChangeListCommand = new DelegateCommand<string>((item) =>
+            //{
+            //    //пробный вариант
+            //    var nlist = new List<string>();
+            //    nlist.Add(item);
+            //    mainModel.SetList(nlist);
+            //});
+
+            LoadListCommand = new DelegateCommand(
+                ()=> { mainModel.SetList(dialogService.LoadFiles()); }
+            );
+
+            ClearListCommand = new DelegateCommand(
+                () => { mainModel.ClearList(); }
+            );
+
 
             ProcessCommand = new DelegateCommand (() => {
-
                 mainModel.ProcessList();
             });
 
             DragFileListCommand = new DelegateCommand<RoutedEventArgs>(
                 (e) => {
 
-                    //можно изменить
-                    var eventArgs = e as DragEventArgs;
-                    var files= (string [])eventArgs.Data.GetData(DataFormats.FileDrop);
-                    mainModel.SetList(files.ToList<string>());
-                    
+                        //можно изменить
+                        var eventArgs = e as DragEventArgs;
+                        var files= (string [])eventArgs.Data.GetData(DataFormats.FileDrop);
+                        mainModel.SetList(files.ToList<string>());                    
                     }
                 );
 

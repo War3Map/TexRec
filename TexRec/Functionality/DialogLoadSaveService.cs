@@ -10,6 +10,7 @@ namespace TexRec.Support
 {
     public class DialogLoadSaveService : IDialogLoadSaveService
     {
+        //TODO: диалоговое окно для загрузки списка файлов из нескольких каталогов
         public List<string> LoadFiles()
         {
             VistaFolderBrowserDialog dialog = new VistaFolderBrowserDialog();

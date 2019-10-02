@@ -46,6 +46,8 @@ namespace TexRec.MainModel
             resultList = new ObservableCollection<Image>();
         }
 
+
+        //задаёт список
         public void SetList(List<string> paths)
         {
             sourceList.Clear();
@@ -57,6 +59,12 @@ namespace TexRec.MainModel
             }
             RaisePropertyChanged("sourceList");
 
+        }
+        //чистит список
+        public void ClearList()
+        {
+            sourceList.Clear();
+            RaisePropertyChanged("sourceList");
         }
 
         /// <summary>
