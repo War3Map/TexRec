@@ -8,5 +8,14 @@ namespace TexRec.ImageViewModel
 {
     class ImageViewModel
     {
+        ImageModel.ImageModel imageModel;
+        public ImageViewModel(string file)
+        {
+
+            imageModel = new ImageModel.ImageModel(file);
+
+        }
     }
 }
+
+

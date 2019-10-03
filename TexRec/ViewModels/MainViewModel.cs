@@ -72,6 +72,8 @@ namespace TexRec.MainViewModel
         public DelegateCommand ClearListCommand { get; }
         //команда перетягивания элементов на список
         public DelegateCommand<RoutedEventArgs> DragFileListCommand { get; }
+        //команда открытия файла
+        public DelegateCommand<string> OpenFileCommand { get; }
 
         //конструктор
         public MainViewModel(IDialogLoadSaveService dialogService)
@@ -90,6 +92,11 @@ namespace TexRec.MainViewModel
             //    nlist.Add(item);
             //    mainModel.SetList(nlist);
             //});
+            OpenFileCommand= new DelegateCommand<string>(
+                (selItem) => {
+                    if (selItem!=null)
+                    new TexRec.ImageView.ImageForm(selItem).Show(); }
+            );
 
             LoadListCommand = new DelegateCommand<string>(
                 (typeParametr)=> { mainModel.SetList(dialogService.LoadFiles(typeParametr)); }

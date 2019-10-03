@@ -16,7 +16,7 @@
             <MenuItem Header="Правка" Height="20" Width="60"/>
             <MenuItem Header="Фильтры" Height="20" Width="100"/>
         </Menu>
-        <Image Margin="0,20,0,0"/>
+        <Image Margin="0,20,0,0" Source="{Binding ImageFile}"/>
 
     </Grid>
 </Window>

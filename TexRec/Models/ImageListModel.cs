@@ -93,6 +93,13 @@ namespace TexRec.MainModel
 
         public void ProcessList()
         {
+            Task immageProcessingTask = Task.Factory.StartNew(
+
+                ()=>
+                {
+                    
+                }
+                );
 
         }
 

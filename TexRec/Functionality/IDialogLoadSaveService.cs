@@ -11,7 +11,7 @@ namespace TexRec.Support
         /// <summary>
         /// Метод для загрузки списка файлов диалоговым окном
         /// </summary>
-        /// <param name="typeParametr"></param>
+        /// <param name="typeParametr">Тип объекта с которым работаем каталог (Directory) или (File).</param>
         /// <returns></returns>
         List<string> LoadFiles(string typeParametr);
         /// <summary>

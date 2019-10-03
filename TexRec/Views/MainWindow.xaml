@@ -17,14 +17,18 @@
             <ColumnDefinition Width="185*"/>
             <ColumnDefinition Width="181*"/>
         </Grid.ColumnDefinitions>
-        <ListView Margin="12,47,3,3" VerticalAlignment="Stretch" AllowDrop="True"
+        <ListView x:Name="sourceFilesLsbx" Margin="12,47,3,3" VerticalAlignment="Stretch" AllowDrop="True"
                   HorizontalAlignment="Stretch" 
                   ItemsSource="{Binding sourceList, UpdateSourceTrigger=PropertyChanged}" DragEnter="ListView_DragEnter">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="Drop">
                     <cmd:InvokeCommandAction Command="{Binding DragFileListCommand}" />
                 </i:EventTrigger>
+                <i:EventTrigger EventName="MouseDoubleClick">
+                    <cmd:InvokeCommandAction Command="{Binding OpenFileCommand}" CommandParameter="{Binding ElementName=sourceFilesLsbx,Path=SelectedItem}" />
+                </i:EventTrigger>
             </i:Interaction.Triggers>
+            
 
 
             <ListView.View>
