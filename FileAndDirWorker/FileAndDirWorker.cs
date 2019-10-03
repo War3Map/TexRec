@@ -9,6 +9,18 @@ namespace FileAndDirWorker
 {
     public class FileAndDirWorker
     {
+        public enum FileType
+        {
+            Image,
+            OfficeDoc,
+            Text
+        }
+
+        public enum SourceType
+        {
+            Directory,
+            File
+        }
 
         /// <summary>
         /// Копирует каталоги

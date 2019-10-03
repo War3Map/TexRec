@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
-using System.Linq;
 
 using Prism.Mvvm;
 using MainModel = TexRec.MainModel;
@@ -23,6 +22,10 @@ namespace TexRec.MainViewModel
         MainModel.ImageListModel mainModel = new MainModel.ImageListModel();
         //Сервис для работы с диалогами
         IDialogLoadSaveService dialogService;
+
+        //могут пригодится
+        ////Сервис для определения типа загрузки(файл/каталог)
+        //IResolveIOService ioservice;
 
 
         public ReadOnlyObservableCollection<string> sourceList => new ReadOnlyObservableCollection<string>( mainModel.GetFileNameList());
@@ -64,7 +67,7 @@ namespace TexRec.MainViewModel
         public DelegateCommand<string> ChangeListCommand { get; }
 
         //команда загрузки списка
-        public DelegateCommand LoadListCommand { get; }
+        public DelegateCommand<string> LoadListCommand { get; }
         //команда очистки списка
         public DelegateCommand ClearListCommand { get; }
         //команда перетягивания элементов на список
@@ -88,8 +91,8 @@ namespace TexRec.MainViewModel
             //    mainModel.SetList(nlist);
             //});
 
-            LoadListCommand = new DelegateCommand(
-                ()=> { mainModel.SetList(dialogService.LoadFiles()); }
+            LoadListCommand = new DelegateCommand<string>(
+                (typeParametr)=> { mainModel.SetList(dialogService.LoadFiles(typeParametr)); }
             );
 
             ClearListCommand = new DelegateCommand(

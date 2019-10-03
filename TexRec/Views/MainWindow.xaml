@@ -38,14 +38,14 @@
                 <MenuItem x:Name="loadFileMenuItem" Header="Загрузить файл" HorizontalAlignment="Left" Height="24" Width="180">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
-                            <i:InvokeCommandAction Command="{Binding LoadListCommand}"/>
+                            <i:InvokeCommandAction Command="{Binding LoadListCommand}" CommandParameter="File"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </MenuItem>
                 <MenuItem Header="Загрузить файлы" HorizontalAlignment="Left" Height="24" Width="189" Margin="0,0,-9,0">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
-                            <i:InvokeCommandAction Command="{Binding LoadListCommand}"/>
+                            <i:InvokeCommandAction Command="{Binding LoadListCommand}" CommandParameter="Directory"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </MenuItem>
