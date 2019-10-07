@@ -93,7 +93,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Functionality\FileOpenerService.cs" />
     <Compile Include="Functionality\IDialog.cs" />
+    <Compile Include="Functionality\ImageViewShower.cs" />
+    <Compile Include="Functionality\IOpenerService.cs" />
+    <Compile Include="Functionality\IViewShower.cs" />
     <Compile Include="Models\ImageModel.cs" />
     <Compile Include="Functionality\IDialogLoadSaveService.cs" />
     <Compile Include="Functionality\DialogLoadSaveService.cs" />

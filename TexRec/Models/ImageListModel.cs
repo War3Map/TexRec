@@ -90,7 +90,9 @@ namespace TexRec.MainModel
                 sourceList.Add(new Image(file));
             }
         }
-
+        /// <summary>
+        /// Обработка списка картинок в модели
+        /// </summary>
         public void ProcessList()
         {
             Task immageProcessingTask = Task.Factory.StartNew(
@@ -103,7 +105,9 @@ namespace TexRec.MainModel
 
         }
 
-
+        /// <summary>
+        /// Сохранение результатов через модель
+        /// </summary>
         public void Save()
         {
 

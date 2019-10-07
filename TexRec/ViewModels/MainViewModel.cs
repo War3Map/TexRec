@@ -22,6 +22,7 @@ namespace TexRec.MainViewModel
         MainModel.ImageListModel mainModel = new MainModel.ImageListModel();
         //Сервис для работы с диалогами
         IDialogLoadSaveService dialogService;
+        IViewShower viewShower;
 
         //могут пригодится
         ////Сервис для определения типа загрузки(файл/каталог)
@@ -76,10 +77,13 @@ namespace TexRec.MainViewModel
         public DelegateCommand<string> OpenFileCommand { get; }
 
         //конструктор
-        public MainViewModel(IDialogLoadSaveService dialogService)
+        public MainViewModel(IDialogLoadSaveService dialogService,IViewShower vievShower)
         {
             //Инициализируем сервис диалоговых окон
             this.dialogService = dialogService;
+            //Инициализируем сервис показа представлений
+            this.viewShower = vievShower;
+
             //пробрасываем изменившиеся свойства модели во View
             mainModel.PropertyChanged += (s, e) => {               
                 RaisePropertyChanged(e.PropertyName);
@@ -93,9 +97,10 @@ namespace TexRec.MainViewModel
             //    mainModel.SetList(nlist);
             //});
             OpenFileCommand= new DelegateCommand<string>(
-                (selItem) => {
-                    if (selItem!=null)
-                    new TexRec.ImageView.ImageForm(selItem).Show(); }
+                (vievParametr) => {
+                    if (vievParametr != null)
+                        viewShower.ShowView("ImageForm", vievParametr);
+                }
             );
 
             LoadListCommand = new DelegateCommand<string>(
