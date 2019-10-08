@@ -19,7 +19,7 @@ namespace TexRec.ImageView
     /// </summary>
     public partial class ImageForm : Window
     {
-        ImageViewModel.ImageViewModel imageView;
+        ImageViewModel.ImageViewModel imageViewModel;
         //public ImageForm()
         //{
         //    InitializeComponent();
@@ -29,7 +29,8 @@ namespace TexRec.ImageView
         public ImageForm(string file)
         {
             InitializeComponent();
-            imageView = new ImageViewModel.ImageViewModel(file);
+            imageViewModel = new ImageViewModel.ImageViewModel(file);
+            DataContext = imageViewModel;
 
         }
     }

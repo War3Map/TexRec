@@ -60,7 +60,13 @@
 
             </MenuItem>
             <MenuItem Header="Правка" Height="24" Width="65">
-                <MenuItem Header="Открыть в просмотрщике" HorizontalAlignment="Right" Height="24" Width="250" Margin="0,0,-40,0"/>
+                <MenuItem Header="Открыть в просмотрщике" HorizontalAlignment="Right" Height="24" Width="250" Margin="0,0,-40,0">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <i:InvokeCommandAction Command="{Binding OpenFileBrowserCommand}" CommandParameter="{Binding ElementName=sourceFilesLsbx,Path=SelectedItem}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </MenuItem>
             </MenuItem>
             <MenuItem Header="Настройки" Height="24" Width="80"/>
         </Menu>

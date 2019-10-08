@@ -22,7 +22,10 @@ namespace TexRec.MainViewModel
         MainModel.ImageListModel mainModel = new MainModel.ImageListModel();
         //Сервис для работы с диалогами
         IDialogLoadSaveService dialogService;
+        //Сервис для показа представлений
         IViewShower viewShower;
+        //Сервис для открытия 
+        IOpenerService openerService;
 
         //могут пригодится
         ////Сервис для определения типа загрузки(файл/каталог)
@@ -75,14 +78,18 @@ namespace TexRec.MainViewModel
         public DelegateCommand<RoutedEventArgs> DragFileListCommand { get; }
         //команда открытия файла
         public DelegateCommand<string> OpenFileCommand { get; }
+        //команда открытия файла в просмотрщике
+        public DelegateCommand<string> OpenFileBrowserCommand { get; }
 
         //конструктор
-        public MainViewModel(IDialogLoadSaveService dialogService,IViewShower vievShower)
+        public MainViewModel(IDialogLoadSaveService dialogService,IViewShower vievShower, IOpenerService openerService)
         {
             //Инициализируем сервис диалоговых окон
             this.dialogService = dialogService;
             //Инициализируем сервис показа представлений
             this.viewShower = vievShower;
+            //Инициализируем сервис открытия документов
+            this.openerService = openerService;
 
             //пробрасываем изменившиеся свойства модели во View
             mainModel.PropertyChanged += (s, e) => {               
@@ -96,10 +103,18 @@ namespace TexRec.MainViewModel
             //    nlist.Add(item);
             //    mainModel.SetList(nlist);
             //});
-            OpenFileCommand= new DelegateCommand<string>(
+
+            OpenFileBrowserCommand = new DelegateCommand<string>(
                 (vievParametr) => {
                     if (vievParametr != null)
                         viewShower.ShowView("ImageForm", vievParametr);
+                }
+            );
+
+            OpenFileCommand = new DelegateCommand<string>(
+                (file) => {
+                    if (file != null)
+                        openerService.Open(file);
                 }
             );
 

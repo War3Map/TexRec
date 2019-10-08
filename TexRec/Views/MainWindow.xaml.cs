@@ -26,7 +26,9 @@ namespace TexRec
         public MainWindow()
         {
             InitializeComponent();
-            viewModel = new TexRec.MainViewModel.MainViewModel(new Support.DialogLoadSaveService(), new Functionality.ImageViewShower());
+            viewModel = new TexRec.MainViewModel.MainViewModel(new Support.DialogLoadSaveService(),
+                new Functionality.ImageViewShower(),
+                new Functionality.FileOpenerService());
             DataContext = viewModel;
 
 

@@ -14,12 +14,15 @@ namespace TexRec.ImageModel
         public string ImagePath
         {
             get { return imagePath; }
-            set { imagePath = value; }
+            set { imagePath = value;
+                RaisePropertyChanged("imagePath");
+            }
         }
         public ImageModel (string imagePath)
         {
 
             ImagePath = imagePath;
+            RaisePropertyChanged("imagePath");
         }
 
 

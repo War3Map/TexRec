@@ -11,7 +11,7 @@ namespace TexRec.Functionality
     {
         public void ShowView(string viewName, string viewParametr)
         {
-            ImageForm imageView=new ImageForm("viewParametr");
+            ImageForm imageView=new ImageForm(viewParametr);
             imageView.Show();            
         }
     }

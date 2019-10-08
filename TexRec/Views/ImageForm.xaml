@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TexRec.ImageView"
         mc:Ignorable="d"
-        Title="Просмотр изображений" Height="423" Width="573.5">
+        Title="Просмотр изображений" Height="423" Width="573.5"
+        WindowStartupLocation="CenterScreen">
     <Grid>
         <Menu Height="20" VerticalAlignment="Top">
             <MenuItem Header="Файл" Height="20" Width="56">
@@ -16,7 +17,7 @@
             <MenuItem Header="Правка" Height="20" Width="60"/>
             <MenuItem Header="Фильтры" Height="20" Width="100"/>
         </Menu>
-        <Image Margin="0,20,0,0" Source="{Binding ImageFile}"/>
+        <Image Margin="0,20,0,0" Source="{Binding SourceImage}"/>
 
     </Grid>
 </Window>
