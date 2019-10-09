@@ -93,7 +93,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Functionality\DragEventHandlerService.cs" />
     <Compile Include="Functionality\FileOpenerService.cs" />
+    <Compile Include="Functionality\IArgsHandlerService.cs" />
     <Compile Include="Functionality\IDialog.cs" />
     <Compile Include="Functionality\ImageViewShower.cs" />
     <Compile Include="Functionality\IOpenerService.cs" />

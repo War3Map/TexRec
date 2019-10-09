@@ -26,12 +26,13 @@ namespace TexRec
         public MainWindow()
         {
             InitializeComponent();
-            viewModel = new TexRec.MainViewModel.MainViewModel(new Support.DialogLoadSaveService(),
+            viewModel = new TexRec.MainViewModel.MainViewModel(
+                new Support.DialogLoadSaveService(),
                 new Functionality.ImageViewShower(),
-                new Functionality.FileOpenerService());
+                new Functionality.FileOpenerService(),
+                new Functionality.DragEventHandlerService()
+                );
             DataContext = viewModel;
-
-
         }
 
         private void ListView_DragEnter(object sender, DragEventArgs e)

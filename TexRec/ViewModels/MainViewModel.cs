@@ -26,6 +26,9 @@ namespace TexRec.MainViewModel
         IViewShower viewShower;
         //Сервис для открытия 
         IOpenerService openerService;
+        //Сервис для обработки аргументов событий
+        IArgsHandlerService argsHandlerService;
+
 
         //могут пригодится
         ////Сервис для определения типа загрузки(файл/каталог)
@@ -82,7 +85,8 @@ namespace TexRec.MainViewModel
         public DelegateCommand<string> OpenFileBrowserCommand { get; }
 
         //конструктор
-        public MainViewModel(IDialogLoadSaveService dialogService,IViewShower vievShower, IOpenerService openerService)
+        public MainViewModel(IDialogLoadSaveService dialogService,IViewShower vievShower,
+            IOpenerService openerService, IArgsHandlerService argsHandlerService)
         {
             //Инициализируем сервис диалоговых окон
             this.dialogService = dialogService;
@@ -90,6 +94,8 @@ namespace TexRec.MainViewModel
             this.viewShower = vievShower;
             //Инициализируем сервис открытия документов
             this.openerService = openerService;
+            //Инициализируем сервис для обработки аргументов событий
+            this.argsHandlerService = argsHandlerService;
 
             //пробрасываем изменившиеся свойства модели во View
             mainModel.PropertyChanged += (s, e) => {               
@@ -132,13 +138,13 @@ namespace TexRec.MainViewModel
             });
 
             DragFileListCommand = new DelegateCommand<RoutedEventArgs>(
-                (e) => {
-
-                        //можно изменить
-                        var eventArgs = e as DragEventArgs;
-                        var files= (string [])eventArgs.Data.GetData(DataFormats.FileDrop);
-                        mainModel.SetList(files.ToList<string>());                    
-                    }
+                (e) => {  
+                    //var eventArgs = e as DragEventArgs;
+                    //var files= (string [])eventArgs.Data.GetData(DataFormats.FileDrop);
+                    //mainModel.SetList(files.ToList<string>());  
+                    ////всё ещё можно изменить                     
+                    mainModel.SetList((List<string>)argsHandlerService.GetHandledEnumResult(e));
+                }
                 );
 
         }
