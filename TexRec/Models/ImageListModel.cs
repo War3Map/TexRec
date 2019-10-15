@@ -7,6 +7,7 @@ using ImageProcessor;
 using System.ComponentModel;
 using Prism.Mvvm;
 using System.Collections.ObjectModel;
+using System.IO;
 
 using FileAndDirWorker;
 
@@ -95,13 +96,37 @@ namespace TexRec.MainModel
         /// </summary>
         public void ProcessList()
         {
-            Task immageProcessingTask = Task.Factory.StartNew(
+            //    Task immageProcessingTask = Task.Factory.StartNew(
 
-                ()=>
-                {
-                    
-                }
-                );
+            //        ()=>
+            //        {
+
+            //        }
+            //        );
+            resultList.Clear();
+            resultList.AddRange(sourceList);
+            if (!Directory.Exists(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "temp")))
+                Directory.CreateDirectory(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "temp"));
+            //Parallel.ForEach(sourceList,
+            //    (x) =>
+            //    {
+            //        //TODO: Определение имени попроще
+            //        string newFilename = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "temp",
+            //            new FileInfo(x.Filename).Name);
+            //        x.ConvertToGray(newFilename);
+            //        resultList.Add(new Image(newFilename));
+            //    }
+            //    );
+            foreach (Image x in sourceList)
+            {
+
+                //TODO: Определение имени попроще
+                string newFilename = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "temp",
+                    new FileInfo(x.Filename).Name);
+                x.ConvertToGray(newFilename);
+                resultList.Add(new Image(newFilename));
+            }
+
 
         }
 

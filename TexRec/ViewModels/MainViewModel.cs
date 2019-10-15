@@ -36,7 +36,7 @@ namespace TexRec.MainViewModel
 
 
         public ReadOnlyObservableCollection<string> sourceList => new ReadOnlyObservableCollection<string>( mainModel.GetFileNameList());
-
+        public ReadOnlyObservableCollection<string> resultList => new ReadOnlyObservableCollection<string>(mainModel.GetFileNameList());
         //private ObservableCollection<string> sourceList;
 
         //public ObservableCollection<string> SourceList
@@ -50,18 +50,18 @@ namespace TexRec.MainViewModel
 
         //}
 
-        private ObservableCollection<string> resultList;
+        //private ObservableCollection<string> resultList;
 
-        public ObservableCollection<string> ResultList
-        {
-            get { return resultList; }
-            private set
-            {
-                resultList = value;
-                RaisePropertyChanged("resultList");
-            }
+        //public ObservableCollection<string> ResultList
+        //{
+        //    get { return resultList; }
+        //    private set
+        //    {
+        //        resultList = value;
+        //        RaisePropertyChanged("resultList");
+        //    }
 
-        }
+        //}
 
 
 
