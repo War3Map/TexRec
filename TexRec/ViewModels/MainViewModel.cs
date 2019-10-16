@@ -35,8 +35,8 @@ namespace TexRec.MainViewModel
         //IResolveIOService ioservice;
 
 
-        public ReadOnlyObservableCollection<string> sourceList => new ReadOnlyObservableCollection<string>( mainModel.GetFileNameList());
-        public ReadOnlyObservableCollection<string> resultList => new ReadOnlyObservableCollection<string>(mainModel.GetFileNameList());
+        public ReadOnlyObservableCollection<string> sourceList => new ReadOnlyObservableCollection<string>(mainModel.GetFileNameList());
+        public ReadOnlyObservableCollection<string> resultList => new ReadOnlyObservableCollection<string>(mainModel.GetResultsList());
         //private ObservableCollection<string> sourceList;
 
         //public ObservableCollection<string> SourceList

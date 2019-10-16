@@ -10,6 +10,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 
 using FileAndDirWorker;
+using System.Windows;
 
 namespace TexRec.MainModel
 {
@@ -82,6 +83,20 @@ namespace TexRec.MainModel
             return files;
         }
 
+        /// <summary>
+        /// Возвращает список имён файлов результата вычислений основной модели
+        /// </summary>
+        /// <returns> List<string> result</returns>
+        public ObservableCollection<string> GetResultsList()
+        {
+            var files = new ObservableCollection<string>();
+            foreach (var imageFile in resultList)
+            {
+                files.Add(imageFile.Filename);
+            }
+            return files;
+        }
+
 
 
         public void AddListItems(List<string> files)
@@ -94,40 +109,52 @@ namespace TexRec.MainModel
         /// <summary>
         /// Обработка списка картинок в модели
         /// </summary>
-        public void ProcessList()
+        public async void ProcessList()
         {
-            //    Task immageProcessingTask = Task.Factory.StartNew(
+            //TODO: Определение имени попроще
 
-            //        ()=>
-            //        {
-
-            //        }
-            //        );
             resultList.Clear();
             resultList.AddRange(sourceList);
             if (!Directory.Exists(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "temp")))
                 Directory.CreateDirectory(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "temp"));
-            //Parallel.ForEach(sourceList,
-            //    (x) =>
-            //    {
-            //        //TODO: Определение имени попроще
-            //        string newFilename = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "temp",
-            //            new FileInfo(x.Filename).Name);
-            //        x.ConvertToGray(newFilename);
-            //        resultList.Add(new Image(newFilename));
-            //    }
-            //    );
-            foreach (Image x in sourceList)
+             await ProcessImages();
+            MessageBox.Show("Действия завершены!");
+
+
+            //immageProcessingTask.Start();
+            //foreach (Image x in sourceList)
+            //{
+
+
+            //    string newFilename = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "temp",
+            //        new FileInfo(x.Filename).Name);
+            //    x.ConvertToGray(newFilename);
+            //    resultList.Add(new Image(newFilename));
+            //}
+
+
+        }
+
+
+        private async Task ProcessImages()
+        {
+
+            Task immageProcessingTask =  Task.Factory.StartNew(
+            () =>
             {
+                Parallel.ForEach(sourceList,
+                (x) =>
+                {
+                    //TODO: Определение имени попроще
+                    string newFilename = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "temp",
+            new FileInfo(x.Filename).Name);
+                    x.ConvertToGray(newFilename);
+                    resultList.Add(new Image(newFilename));
+                }
+                );
+            });
 
-                //TODO: Определение имени попроще
-                string newFilename = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "temp",
-                    new FileInfo(x.Filename).Name);
-                x.ConvertToGray(newFilename);
-                resultList.Add(new Image(newFilename));
-            }
-
-
+            await immageProcessingTask;
         }
 
         /// <summary>

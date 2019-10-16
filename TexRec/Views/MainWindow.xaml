@@ -27,9 +27,7 @@
                 <i:EventTrigger EventName="MouseDoubleClick">
                     <cmd:InvokeCommandAction Command="{Binding OpenFileCommand}" CommandParameter="{Binding ElementName=sourceFilesLsbx,Path=SelectedItem}" />
                 </i:EventTrigger>
-            </i:Interaction.Triggers>
-            
-
+            </i:Interaction.Triggers> 
 
             <ListView.View>
                 <GridView>
@@ -70,7 +68,8 @@
             </MenuItem>
             <MenuItem Header="Настройки" Height="24" Width="80"/>
         </Menu>
-        <ListView Margin="10,47,5,3" Grid.Column="1" ItemsSource="{Binding resultList, UpdateSourceTrigger=PropertyChanged}">
+        <ListView x:Name="resultFilesLsbx" Margin="10,47,5,3" Grid.Column="1" 
+         ItemsSource="{Binding resultList, UpdateSourceTrigger=PropertyChanged}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
