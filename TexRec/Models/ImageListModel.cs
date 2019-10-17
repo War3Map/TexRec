@@ -113,11 +113,11 @@ namespace TexRec.MainModel
         {
             //TODO: Определение имени попроще
 
-            resultList.Clear();
-            resultList.AddRange(sourceList);
+            resultList.Clear();          
             if (!Directory.Exists(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "temp")))
                 Directory.CreateDirectory(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "temp"));
              await ProcessImages();
+            RaisePropertyChanged("resultList");
             MessageBox.Show("Действия завершены!");
 
 
