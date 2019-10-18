@@ -27,7 +27,7 @@
                 <i:EventTrigger EventName="MouseDoubleClick">
                     <cmd:InvokeCommandAction Command="{Binding OpenFileCommand}" CommandParameter="{Binding ElementName=sourceFilesLsbx,Path=SelectedItem}" />
                 </i:EventTrigger>
-            </i:Interaction.Triggers> 
+            </i:Interaction.Triggers>
 
             <ListView.View>
                 <GridView>
@@ -52,8 +52,20 @@
                     </i:Interaction.Triggers>
                 </MenuItem>
                 <Separator HorizontalAlignment="Left" Width="180"/>
-                <MenuItem Header="Сохранить..." HorizontalAlignment="Left" Height="24" Width="180"/>
-                <MenuItem Header="Сохранить как..." HorizontalAlignment="Left" Height="24" Width="180"/>
+                <MenuItem Header="Сохранить файл..." HorizontalAlignment="Left" Height="24" Width="195" Margin="0,0,-15,0">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <i:InvokeCommandAction Command="{Binding SaveListCommand}" CommandParameter="File"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </MenuItem>
+                <MenuItem Header="Сохранить всё..." HorizontalAlignment="Left" Height="24" Width="180">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <i:InvokeCommandAction Command="{Binding SaveListCommand}" CommandParameter="Directory"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </MenuItem>
                 <Separator HorizontalAlignment="Left" Width="180"/>
 
             </MenuItem>
@@ -70,6 +82,13 @@
         </Menu>
         <ListView x:Name="resultFilesLsbx" Margin="10,47,5,3" Grid.Column="1" 
          ItemsSource="{Binding resultList, UpdateSourceTrigger=PropertyChanged}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseDoubleClick">
+                    <cmd:InvokeCommandAction Command="{Binding OpenFileCommand}" CommandParameter="{Binding ElementName=resultFilesLsbx,Path=SelectedItem}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+
+
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
@@ -81,7 +100,8 @@
         <ProgressBar Grid.ColumnSpan="2" Margin="10,85,10,0" Height="20" VerticalAlignment="Top" Grid.Row="1"/>
         <Button Content="Обработать" Margin="13,10,10,0" Command="{Binding ProcessCommand}" 
                 Height="38" VerticalAlignment="Top" Grid.Row="1"/>
-        <Button Content="Открыть" Margin="10,10,10,0" Height="38" VerticalAlignment="Top" Grid.Row="1" Grid.Column="1"/>
+        <Button Content="Открыть" Margin="10,10,10,0" Height="38" VerticalAlignment="Top" Grid.Row="1" Grid.Column="1"
+                Command="{Binding OpenFileCommand}" CommandParameter="{Binding ElementName=resultFilesLsbx, Path=SelectedItem}"/>
         <Button x:Name="clearSourceListBttn" Content="X" Command="{Binding ClearListCommand}" Margin="0,21,4,0" Height="22" VerticalAlignment="Top" HorizontalAlignment="Right" Width="25"/>
 
     </Grid>

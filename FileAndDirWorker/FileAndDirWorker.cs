@@ -75,6 +75,24 @@ namespace FileAndDirWorker
         }
 
         /// <summary>
+        /// Сохраняет список файлов в указанной директории.Операция выполняется в отдельном потоке и параллельно.
+        /// </summary>
+        /// <param name="files">Список файлов</param>
+        /// <param name="destinationDir">Директория назначения</param>
+        public static void SaveFiles(List<string> files,string destinationDir)
+        {
+            Task.Factory.StartNew(()=>
+                Parallel.ForEach(files,
+                    (file) => {
+                        File.Copy(file,
+                            Path.Combine(destinationDir,Path.GetFileName(file)),
+                            true);
+                    }
+                    ) 
+            );
+        }
+
+        /// <summary>
         /// Проверяет допустимые расширения для изображений
         /// </summary>
         /// <param name="filename">расширение файла</param>
@@ -92,7 +110,7 @@ namespace FileAndDirWorker
                     .Select(x => x)
                     .Count() > 0 ?
                     true : false;
-        }
+        }        
 
 
     }

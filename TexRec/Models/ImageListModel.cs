@@ -112,7 +112,6 @@ namespace TexRec.MainModel
         public async void ProcessList()
         {
             //TODO: Определение имени попроще
-
             resultList.Clear();          
             if (!Directory.Exists(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "temp")))
                 Directory.CreateDirectory(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "temp"));
@@ -157,13 +156,20 @@ namespace TexRec.MainModel
             await immageProcessingTask;
         }
 
+
+        ///TODO: А надо ли это здесь вообще?
         /// <summary>
-        /// Сохранение результатов через модель
+        /// Сохраняет результаты списка в указанную директорию
         /// </summary>
-        public void Save()
+        /// <param name="typeParametr">Тип сохранения результатов: сохранение одного файла или сохранение всех в каталог</param>
+        public void SaveResults(Support.IDialogLoadSaveService loadSaveService,string typeParametr)
         {
-
-
+            var resList = new List<string>();
+            foreach (var res in resultList)
+            {
+                resList.Add(res.Filename);
+            }
+            loadSaveService.SaveFiles(resList, typeParametr);
         }
 
 

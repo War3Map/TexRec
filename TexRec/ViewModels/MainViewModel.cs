@@ -75,6 +75,8 @@ namespace TexRec.MainViewModel
 
         //команда загрузки списка
         public DelegateCommand<string> LoadListCommand { get; }
+        //команда сохранения списка результатов
+        public DelegateCommand<string> SaveListCommand { get; }
         //команда очистки списка
         public DelegateCommand ClearListCommand { get; }
         //команда перетягивания элементов на список
@@ -126,6 +128,10 @@ namespace TexRec.MainViewModel
 
             LoadListCommand = new DelegateCommand<string>(
                 (typeParametr)=> { mainModel.SetList(dialogService.LoadFiles(typeParametr)); }
+            );
+
+            SaveListCommand = new DelegateCommand<string>(
+                (typeParametr) => { mainModel.SaveResults(dialogService, typeParametr); }
             );
 
             ClearListCommand = new DelegateCommand(

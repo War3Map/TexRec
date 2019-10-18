@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Ookii.Dialogs.Wpf;
 using System.Windows;
 using static FileAndDirWorker.FileAndDirWorker;
+using System.IO;
 
 namespace TexRec.Support
 {
@@ -31,7 +32,7 @@ namespace TexRec.Support
             dialog.Title = "Выберете файлы изображений";
             dialog.Filter = "Файлы изображений (*.jpg;*.jpeg;*.png;*.bmp)|*.jpg;*.jpeg;*.png";
             dialog.Multiselect = true;
-            if (!VistaFolderBrowserDialog.IsVistaFolderDialogSupported)
+            if (!VistaOpenFileDialog.IsVistaFileDialogSupported)
                 MessageBox.Show("Because you are not using Windows Vista or later, the regular folder browser dialog will be used. Please use Windows Vista to see the new dialog.", "Sample folder browser dialog");
             if ((bool)dialog.ShowDialog())
                 //добавление
@@ -54,10 +55,38 @@ namespace TexRec.Support
                 //добавление
                 resFileList.Add(dialog.SelectedPath);            
         }
+        /// <summary>
+        /// Сохранение файлов
+        /// </summary>
+        /// <param name="files"></param>
+        /// <param name="type"></param>
+        public void SaveFiles(List<string> files, string type)
+        {          
+            if (type == "Directory") SaveToDirectory(files);
+            else SaveFileToDirectory(files);  
+        }
 
-        public void SaveFiles(List<string> files)
+        private void SaveFileToDirectory(List<string> files)
         {
-            throw new NotImplementedException();
+            VistaFolderBrowserDialog dialog = new VistaFolderBrowserDialog();
+            dialog.Description = "Выберете папку с изображениями";
+            dialog.UseDescriptionForTitle = true; // This applies to the Vista style dialog only, not the old dialog.
+            if (!VistaFolderBrowserDialog.IsVistaFolderDialogSupported)
+                MessageBox.Show("Because you are not using Windows Vista or later, the regular folder browser dialog will be used. Please use Windows Vista to see the new dialog.", "Sample folder browser dialog");
+            if ((bool)dialog.ShowDialog())
+                FileAndDirWorker.FileAndDirWorker.SaveFiles(files, dialog.SelectedPath);
+        }
+
+        private void SaveToDirectory(List<string> files)
+        {
+            VistaSaveFileDialog dialog = new VistaSaveFileDialog();
+            dialog.Title = "Сохранение файла";
+            dialog.Filter = "Файлы изображений (*.jpg;*.jpeg;*.png;*.bmp)|*.jpg;*.jpeg;*.png";
+
+            if (!VistaSaveFileDialog.IsVistaFileDialogSupported)
+                MessageBox.Show("Because you are not using Windows Vista or later, the regular folder browser dialog will be used. Please use Windows Vista to see the new dialog.", "Sample folder browser dialog");
+            if ((bool)dialog.ShowDialog())
+                FileAndDirWorker.FileAndDirWorker.SaveFiles(files, Path.GetDirectoryName(dialog.FileName));
         }
 
         public void ShowDialog()

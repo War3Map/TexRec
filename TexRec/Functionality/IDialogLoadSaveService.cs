@@ -17,8 +17,9 @@ namespace TexRec.Support
         /// <summary>
         /// Метод для сохранения списка выбранных в диалоговом окна файлов 
         /// </summary>
-        /// <param name="files"></param>
-        void SaveFiles(List<string> files);
+        /// <param name="files"></param>  
+        /// <param name="typeParametr">Тип объекта с которым работаем каталог (Directory) или (File).</param>        
+        void SaveFiles(List<string> files, string typeParametr);
 
     }
 }
