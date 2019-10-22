@@ -52,17 +52,17 @@
                     </i:Interaction.Triggers>
                 </MenuItem>
                 <Separator HorizontalAlignment="Left" Width="180"/>
-                <MenuItem Header="Сохранить файл..." HorizontalAlignment="Left" Height="24" Width="195" Margin="0,0,-15,0">
+                <MenuItem Header="Сохранить выбранные..." HorizontalAlignment="Left" Height="24" Width="239" Margin="0,0,-59,0">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
-                            <i:InvokeCommandAction Command="{Binding SaveListCommand}" CommandParameter="File"/>
+                            <i:InvokeCommandAction Command="{Binding SaveSelectedCommand}" CommandParameter="{Binding ElementName=resultFilesLsbx,Path=SelectedItems}"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </MenuItem>
                 <MenuItem Header="Сохранить всё..." HorizontalAlignment="Left" Height="24" Width="180">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
-                            <i:InvokeCommandAction Command="{Binding SaveListCommand}" CommandParameter="Directory"/>
+                            <i:InvokeCommandAction Command="{Binding SaveListCommand}"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </MenuItem>

@@ -37,7 +37,7 @@ namespace TexRec
 
         private void ListView_DragEnter(object sender, DragEventArgs e)
         {
-            e.Effects = DragDropEffects.Move;
+            e.Effects = DragDropEffects.Move;  
         }
     }
 }

@@ -12,6 +12,7 @@ using System.Collections.ObjectModel;
 using TexRec.Functionality;
 using TexRec.Support;
 using System.Windows;
+using System.Collections;
 
 namespace TexRec.MainViewModel
 {
@@ -75,8 +76,11 @@ namespace TexRec.MainViewModel
 
         //команда загрузки списка
         public DelegateCommand<string> LoadListCommand { get; }
-        //команда сохранения списка результатов
-        public DelegateCommand<string> SaveListCommand { get; }
+        //команда сохранения всего списка результатов
+        public DelegateCommand SaveListCommand { get; }
+        //команда сохранения выбранных результатов
+        public DelegateCommand<IList> SaveSelectedCommand { get; }
+
         //команда очистки списка
         public DelegateCommand ClearListCommand { get; }
         //команда перетягивания элементов на список
@@ -130,9 +134,23 @@ namespace TexRec.MainViewModel
                 (typeParametr)=> { mainModel.SetList(dialogService.LoadFiles(typeParametr)); }
             );
 
-            SaveListCommand = new DelegateCommand<string>(
-                (typeParametr) => { mainModel.SaveResults(dialogService, typeParametr); }
+
+            //Возможно сохранение не через модель
+            SaveListCommand = new DelegateCommand(
+                () => { mainModel.SaveResults(dialogService); }
             );
+            //TODO:Поменять на более удобный вариант
+            SaveSelectedCommand = new DelegateCommand<IList>(
+                 (items) => {
+                     if (items.Count > 0)
+                     {
+                         var list = new List<string>();
+                         foreach (var item in items)
+                             list.Add(item.ToString());
+                         dialogService.SaveFiles(list, "List");
+                     }
+                            }
+             );
 
             ClearListCommand = new DelegateCommand(
                 () => { mainModel.ClearList(); }

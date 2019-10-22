@@ -62,11 +62,13 @@ namespace TexRec.Support
         /// <param name="type"></param>
         public void SaveFiles(List<string> files, string type)
         {          
-            if (type == "Directory") SaveToDirectory(files);
-            else SaveFileToDirectory(files);  
+            //if (type == "Directory") SaveToDirectory(files);
+            //else SaveFileToDirectory(files);
+            SaveToDirectory(files);
         }
 
-        private void SaveFileToDirectory(List<string> files)
+        
+        private void SaveToDirectory(List<string> files)
         {
             VistaFolderBrowserDialog dialog = new VistaFolderBrowserDialog();
             dialog.Description = "Выберете папку с изображениями";
@@ -76,8 +78,8 @@ namespace TexRec.Support
             if ((bool)dialog.ShowDialog())
                 FileAndDirWorker.FileAndDirWorker.SaveFiles(files, dialog.SelectedPath);
         }
-
-        private void SaveToDirectory(List<string> files)
+        //TODO:Нужно ли сохранение одиночного файла?
+        private void SaveFileToDirectory(List<string> files)
         {
             VistaSaveFileDialog dialog = new VistaSaveFileDialog();
             dialog.Title = "Сохранение файла";

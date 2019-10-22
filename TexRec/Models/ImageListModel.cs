@@ -160,16 +160,15 @@ namespace TexRec.MainModel
         ///TODO: А надо ли это здесь вообще?
         /// <summary>
         /// Сохраняет результаты списка в указанную директорию
-        /// </summary>
-        /// <param name="typeParametr">Тип сохранения результатов: сохранение одного файла или сохранение всех в каталог</param>
-        public void SaveResults(Support.IDialogLoadSaveService loadSaveService,string typeParametr)
+        /// </summary>        
+        public void SaveResults(Support.IDialogLoadSaveService loadSaveService)
         {
             var resList = new List<string>();
             foreach (var res in resultList)
             {
                 resList.Add(res.Filename);
             }
-            loadSaveService.SaveFiles(resList, typeParametr);
+           loadSaveService.SaveFiles(resList, "Directory");
         }
 
 
