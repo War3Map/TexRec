@@ -8,9 +8,11 @@ using System.ComponentModel;
 using Prism.Mvvm;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 
 using FileAndDirWorker;
 using System.Windows;
+using System.Collections;
 
 namespace TexRec.MainModel
 {
@@ -63,10 +65,18 @@ namespace TexRec.MainModel
 
         }
         //чистит список
-        public void ClearList()
+        public void ClearList(string name)
         {
-            sourceList.Clear();
-            RaisePropertyChanged("sourceList");
+            if (name == "source")
+            {
+                sourceList.Clear();
+                RaisePropertyChanged("sourceList");
+            }
+            else
+            {
+                resultList.Clear();
+                RaisePropertyChanged("resultList");
+            }
         }
 
         /// <summary>
@@ -98,7 +108,10 @@ namespace TexRec.MainModel
         }
 
 
-
+        /// <summary>
+        /// Добавляет новые файлы в список
+        /// </summary>
+        /// <param name="files"></param>
         public void AddListItems(List<string> files)
         {
             foreach (string file in files)
@@ -134,7 +147,10 @@ namespace TexRec.MainModel
 
         }
 
-
+        /// <summary>
+        /// Метод для обработки изображений
+        /// </summary>
+        /// <returns>Возвращает Task</returns>
         private async Task ProcessImages()
         {
 
@@ -171,6 +187,40 @@ namespace TexRec.MainModel
            loadSaveService.SaveFiles(resList, "Directory");
         }
 
+        public void RemoveItems(IList list,string listName)
+        {
+            ObservableCollection<Image> editList;
+            if (listName == "source")
+                editList = SourceList;
+            else
+                editList = ResultList;
 
+            foreach (var item in list)
+            {
+                editList.Remove(editList
+                .Where((x) => (x.Filename == item.ToString()))
+                .First()
+                );
+                //foreach (var image in editList)
+                //{
+
+                //    if (image.Filename== item.ToString())
+                //    {
+                //        editList.Remove(image);
+                //        break;
+                //    }
+                //}
+
+            }
+            if (listName == "source")
+                RaisePropertyChanged( "sourceList");
+            else
+                RaisePropertyChanged("resultList");
+
+
+
+
+
+        }
     }
 }

@@ -81,12 +81,17 @@ namespace TexRec.MainViewModel
         //команда сохранения выбранных результатов
         public DelegateCommand<IList> SaveSelectedCommand { get; }
 
+        //команда удаления выбранных элементов списка
+        public DelegateCommand<IList> DeleteSelectedResultsCommand { get; }
+        //команда удаления выбранных элементов списка
+        public DelegateCommand<IList> DeleteSelectedSourceCommand { get; }
+
         //команда очистки списка
-        public DelegateCommand ClearListCommand { get; }
+        public DelegateCommand<string> ClearListCommand { get; }
         //команда перетягивания элементов на список
         public DelegateCommand<RoutedEventArgs> DragFileListCommand { get; }
         //команда открытия файла
-        public DelegateCommand<string> OpenFileCommand { get; }
+        public DelegateCommand<object> OpenFileCommand { get; }
         //команда открытия файла в просмотрщике
         public DelegateCommand<string> OpenFileBrowserCommand { get; }
 
@@ -123,10 +128,11 @@ namespace TexRec.MainViewModel
                 }
             );
 
-            OpenFileCommand = new DelegateCommand<string>(
-                (file) => {
-                    if (file != null)
-                        openerService.Open(file);
+            OpenFileCommand = new DelegateCommand<object>(
+                (name) => {
+                    if (name.GetType() == typeof(string))
+                        if (name != null)
+                            openerService.Open(name.ToString());
                 }
             );
 
@@ -152,8 +158,29 @@ namespace TexRec.MainViewModel
                             }
              );
 
-            ClearListCommand = new DelegateCommand(
-                () => { mainModel.ClearList(); }
+            //команда удаления выбранных элементов из списка
+            DeleteSelectedSourceCommand = new DelegateCommand<IList>(
+                 (items) => {
+                     if (items.Count > 0)
+                     {
+                         mainModel.RemoveItems(items,"source");
+                     }
+                 }
+             );
+
+            //команда удаления выбранных элементов из списка
+            DeleteSelectedResultsCommand = new DelegateCommand<IList>(
+                 (items) => {
+                     if (items.Count > 0)
+                     {
+                         mainModel.RemoveItems(items, "result");
+                     }
+                 }
+             );
+
+
+            ClearListCommand = new DelegateCommand<string>(
+                (l) => { mainModel.ClearList(l); }
             );
 
 
