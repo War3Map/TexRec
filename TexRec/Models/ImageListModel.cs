@@ -44,6 +44,19 @@ namespace TexRec.MainModel
 
         }
 
+        private int progressPercentage;
+
+        public int ProgressPercentage
+        {
+            get { return progressPercentage; }
+            private set
+            {
+                progressPercentage = value;
+                RaisePropertyChanged("progressPercentage");
+            }
+
+        }
+
         public ImageListModel()
         {
             sourceList = new ObservableCollection<Image>();
@@ -153,10 +166,11 @@ namespace TexRec.MainModel
         /// <returns>Возвращает Task</returns>
         private async Task ProcessImages()
         {
-
+            Functionality.ProgressReporter progReporter = new Functionality.ProgressReporter();
             Task immageProcessingTask =  Task.Factory.StartNew(
             () =>
             {
+                progReporter.MaxProgress = sourceList.Count;
                 Parallel.ForEach(sourceList,
                 (x) =>
                 {
@@ -167,7 +181,10 @@ namespace TexRec.MainModel
                     lock (resultList)
                     {
                         resultList.Add(new Image(newFilename));
-                    }                    
+                    }
+                    progReporter.CurrentProgress++;
+                    ProgressPercentage = progReporter.Percentage;
+                    
                 }
                 );
             });

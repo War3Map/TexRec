@@ -100,6 +100,7 @@
     <Compile Include="Functionality\ImageViewShower.cs" />
     <Compile Include="Functionality\IOpenerService.cs" />
     <Compile Include="Functionality\IViewShower.cs" />
+    <Compile Include="Functionality\ProgressReporter.cs" />
     <Compile Include="Models\ImageModel.cs" />
     <Compile Include="Functionality\IDialogLoadSaveService.cs" />
     <Compile Include="Functionality\DialogLoadSaveService.cs" />

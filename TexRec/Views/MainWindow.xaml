@@ -7,32 +7,32 @@
         xmlns:local="clr-namespace:TexRec"
         xmlns:prism="http://prismlibrary.com/"
         mc:Ignorable="d"
-        Title="TexRec" Height="530.584" Width="572.581">
+        Title="TexRec" Height="428.584" Width="572.581">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="101*"/>
-            <RowDefinition Height="55*"/>
+            <RowDefinition Height="43*"/>
+            <RowDefinition Height="14*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="185*"/>
             <ColumnDefinition Width="181*"/>
         </Grid.ColumnDefinitions>
-        <ListView x:Name="sourceFilesLsbx" Margin="12,47,3,3" VerticalAlignment="Stretch" AllowDrop="True"
+        <ListView x:Name="sourceFilesLsbx" Margin="12,47,3,3.333" VerticalAlignment="Stretch" AllowDrop="True"
                   HorizontalAlignment="Stretch" 
                   ItemsSource="{Binding sourceList, UpdateSourceTrigger=PropertyChanged}" DragEnter="ListView_DragEnter">
             <ListView.InputBindings>
                 <KeyBinding Gesture="Delete" Command="{Binding DeleteSelectedSourceCommand}" 
-                            CommandParameter="{Binding ElementName=sourceFilesLsbx,Path=SelectedItems}"/>                
+                            CommandParameter="{Binding ElementName=sourceFilesLsbx,Path=SelectedItems}"/>
                 <!--<MouseBinding MouseAction="LeftDoubleClick" Command="{Binding OpenFileCommand}" 
                               CommandParameter="{Binding ElementName=sourceFilesLsbx,Path=SelectedItem}"/>-->
             </ListView.InputBindings>
-            
-                
-            
+
+
+
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="Drop">
                     <prism:InvokeCommandAction Command="{Binding DragFileListCommand}" />
-                </i:EventTrigger>   
+                </i:EventTrigger>
                 <i:EventTrigger EventName="MouseDoubleClick">
                     <prism:InvokeCommandAction Command="{Binding OpenFileCommand}" 
                         CommandParameter="{Binding ElementName=sourceFilesLsbx,Path=SelectedItem}" />
@@ -101,7 +101,7 @@
             </MenuItem>
             <MenuItem Header="Настройки" Height="24" Width="80"/>
         </Menu>
-        <ListView x:Name="resultFilesLsbx" Margin="10,47,5,3" Grid.Column="1" 
+        <ListView x:Name="resultFilesLsbx" Margin="10,47,5,3.333" Grid.Column="1" 
          ItemsSource="{Binding resultList, UpdateSourceTrigger=PropertyChanged}">
             <ListView.InputBindings>
                 <KeyBinding Gesture="Delete" Command="{Binding DeleteSelectedResultsCommand}" 
@@ -125,10 +125,11 @@
         </ListView>
         <Label Content="Исходные файлы:" HorizontalAlignment="Left" Margin="12,21,0,0" VerticalAlignment="Top" Height="26" Width="110"/>
         <Label Content="Результат:" HorizontalAlignment="Left" Margin="10,21,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="65"/>
-        <ProgressBar Grid.ColumnSpan="2" Margin="10,85,10,0" Height="20" VerticalAlignment="Top" Grid.Row="1"/>
-        <Button Content="Обработать" Margin="13,10,10,0" Command="{Binding ProcessCommand}" 
-                Height="38" VerticalAlignment="Top" Grid.Row="1"/>
-        <Button Content="Открыть" Margin="10,10,10,0" Height="38" VerticalAlignment="Top" Grid.Row="1" Grid.Column="1"
+        <ProgressBar x:Name="progressPgbr" Grid.ColumnSpan="2" Margin="15,62.667,10,0" Height="20" VerticalAlignment="Top" Grid.Row="1"
+              Value= "{Binding ProgressPercentage, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Visibility="Hidden" />
+        <Button Content="Обработать" Margin="15,9.667,8,0" Command="{Binding ProcessCommand}" 
+                Height="38" VerticalAlignment="Top" Grid.Row="1" Click="Button_Click"/>
+        <Button Content="Открыть" Margin="10,9.667,10,0" Height="38" VerticalAlignment="Top" Grid.Row="1" Grid.Column="1"
                 Command="{Binding OpenFileCommand}" CommandParameter="{Binding ElementName=resultFilesLsbx, Path=SelectedItem}"/>
         <Button x:Name="clearSourceListBttn" Content="X" Command="{Binding ClearListCommand}" CommandParameter="source" Margin="0,21,4,0" Height="22" VerticalAlignment="Top" HorizontalAlignment="Right" Width="25"/>
         <Button x:Name="clearResultListBttn" Content="X" Command="{Binding ClearListCommand}" CommandParameter="result" Margin="0,20,5,0" Height="22" VerticalAlignment="Top" HorizontalAlignment="Right" Width="25" Grid.Column="1"/>

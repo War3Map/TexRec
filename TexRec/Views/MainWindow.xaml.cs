@@ -40,5 +40,9 @@ namespace TexRec
             e.Effects = DragDropEffects.Move;  
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            progressPgbr.Visibility = Visibility.Visible;
+        }
     }
 }
