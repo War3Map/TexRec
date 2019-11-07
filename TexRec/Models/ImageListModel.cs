@@ -164,7 +164,10 @@ namespace TexRec.MainModel
                     string newFilename = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "temp",
             new FileInfo(x.Filename).Name);
                     x.ConvertToGray(newFilename);
-                    resultList.Add(new Image(newFilename));
+                    lock (resultList)
+                    {
+                        resultList.Add(new Image(newFilename));
+                    }                    
                 }
                 );
             });
